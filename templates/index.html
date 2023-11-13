@@ -1,0 +1,86 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Functions</title>
+</head>
+<body>
+    <h2>Flask Functions</h2>
+
+    <!-- Add Numbers Form -->
+    <form action="/add" method="get" name="addForm">
+        <label for="add_num1">Number 1:</label>
+        <input type="text" id="add_num1" name="num1" required>
+
+        <label for="add_num2">Number 2:</label>
+        <input type="text" id="add_num2" name="num2" required>
+
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Subtract Numbers Form -->
+    <form action="/subtract" method="get" name="subtractForm">
+        <label for="sub_num1">Number 1:</label>
+        <input type="text" id="sub_num1" name="num1" required>
+
+        <label for="sub_num2">Number 2:</label>
+        <input type="text" id="sub_num2" name="num2" required>
+
+        <button type="submit">Subtract</button>
+    </form>
+
+    <!-- Sum of Digits Form -->
+    <form action="/sum_of_digits" method="get" name="sumDigitsForm">
+        <label for="sum_digits">Number:</label>
+        <input type="text" id="sum_digits" name="number" required>
+
+        <button type="submit">Sum of Digits</button>
+    </form>
+
+    <!-- Palindrome Check Form -->
+    <form action="/ispal" method="get" name="ispalForm">
+        <label for="ispal_num">Number:</label>
+        <input type="text" id="ispal_num" name="number" required>
+
+        <button type="submit">Check Palindrome</button>
+    </form>
+
+    <!-- Zip Function Form -->
+    <form action="/myzip" method="get" name="myzipForm">
+        <label for="zip_list1">List 1:</label>
+        <input type="text" id="zip_list1" name="list1" required>
+
+        <label for="zip_list2">List 2:</label>
+        <input type="text" id="zip_list2" name="list2" required>
+
+        <button type="submit">Zip</button>
+    </form>
+
+    <!-- Result Display Area -->
+    <!-- You can use JavaScript to dynamically display the result on the same page -->
+    <div id="result"></div>
+
+    <script>
+        // Add event listeners for form submissions and handle the results
+        // Example using Fetch API:
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const action = form.getAttribute('action');
+
+                fetch(action, {
+                    method: form.getAttribute('method'),
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById('result').innerHTML = result;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
